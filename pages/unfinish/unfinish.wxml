@@ -1,0 +1,27 @@
+<!--pages/unfinish/unfinish.wxml-->
+<form>
+	<view class="container bg-white shadow-lg">
+		<view class="cu-form-group align-start" style="display:flex">
+		<span class='red'>*</span>
+			<textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="textareaAInput" placeholder="请填写未完成原因"></textarea>
+		</view>
+		<view class="cu-bar">
+			<view class="action"><span class='red'>*</span>图片上传：</view>
+			<view class="action">{{imgList.length}}/3</view>
+		</view>
+		<view class="cu-form-group">
+			<view class="grid col-3 grid-square flex-sub">
+				<view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+					<image src='{{imgList[index]}}' mode='aspectFill'></image>
+					<view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+						<text class="cuIcon-close"></text>
+					</view>
+				</view>
+				<view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<3}}">
+					<text class="cuIcon-cameraadd"></text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="btn flex flex-direction"><button class="cu-btn lg bg-green" bindtap="failOrder">确认提交</button></view>
+</form>

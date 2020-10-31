@@ -1,0 +1,6 @@
+/* pages/reward/reward.wxss */
+@import "../details/details.wxss";
+.reward-money{padding:40rpx;box-sizing:border-box;text-align:center;}
+.reward-money .text-xxl{font-size:56rpx;color:#333;font-weight:bold;}
+.icon image{width:64rpx;height:64rpx;border-radius:50%;display:block;margin-right:20rpx;}
+.text-orange{color:#FFA002;font-weight:bold;}

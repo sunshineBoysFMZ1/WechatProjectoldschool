@@ -1,0 +1,2 @@
+/* pages/unfinish/unfinish.wxss */
+@import "../finish/finish.wxss";

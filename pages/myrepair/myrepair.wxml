@@ -1,0 +1,85 @@
+<!--pages/myrepair/myrepair.wxml-->
+<wxs module='Time' src='../index/time.wxs'></wxs>
+<scroll-view scroll-x class="nav bg-white" scroll-with-animation scroll-left="{{scrollLeft}}">
+	<view class="">
+		<view class="cu-item {{0==TabCur?'cur':''}}" bindtap="tabSelect" data-id="0">
+			<text>待接单</text><text class="text-yellow">({{listnum.djd}})</text></view>
+		<view class="cu-item {{1==TabCur?'cur':''}}" bindtap="tabSelect" data-id="1">
+			<text>已接单</text><text class="text-yellow">({{listnum.yjd}})</text></view>
+		<view class="cu-item {{2==TabCur?'cur':''}}" bindtap="tabSelect" data-id="2">
+			<text>维修中</text><text class="text-green">({{listnum.wxz}})</text></view>
+		<view class="cu-item {{3==TabCur?'cur':''}}" bindtap="tabSelect" data-id="3">
+			<text>未完成</text><text class="text-red">({{listnum.wwc}})</text></view>
+		<view class="cu-item {{4==TabCur?'cur':''}}" bindtap="tabSelect" data-id="4">
+			<text>已完成</text><text class="text-blue">({{listnum.ywc}})</text></view>
+	</view>
+</scroll-view>
+<swiper class="tab-content" current="{{TabCur}}" duration="300" bindchange="switchTab" style="height:calc(100vh - 92rpx)">
+	<swiper-item wx:for="{{index}}" wx:key='index'>
+		<scroll-view scroll-y class="pagecontent" bindscrolltolower='scrolltolower'>
+			<view wx:if='{{getlistData.length}}'>
+				<block wx:for='{{getlistData}}' wx:for-item='order' wx:for-index='ii' wx:key='ii'>
+					<view class="order-list">
+						<view class="cu-list menu">
+							<!-- ../details_re/details_re(已接单,维修中) pages/details_not/details_not(未完成) pages/details_pj/details_pj(已完成)-->
+							<navigator hover-class="none" url="{{TabCur == 1 || TabCur == 2 ? '../details_re/details_re' : TabCur == 3 ? '../details_not/details_not' :TabCur == 4 ? '../details_pj/details_pj':'../details/details' }}?id={{order.id}}">
+								<view class="orderbar solid-bottom">
+									<view class="text-black text-lg">{{order.category.name}}</view>
+									<view class="status {{TabCur==2?'bg-green':TabCur== 3 ? 'bg-red': TabCur==4 ? 'bg-blue':''}}">{{TabCur == 1 ? '已接单' : TabCur == 2 ? '维修中' : TabCur == 3 ? '未完成' : TabCur == 4 ? '已完成' : '待接单'}}</view>
+								</view>
+								<view class="padding">
+									<view class="pitem flex">
+										<view class="text-dark">订单编号：</view>
+										<view class="flex-sub">{{order.order_no}}</view>
+									</view>
+									<view class="pitem flex">
+										<view class="text-dark">维修地址：</view>
+										<view class="flex-sub">{{order.area.name}}-{{order.floor.name}}-{{order.address}}</view>
+									</view>
+									<view class="pitem flex">
+										<view class="text-dark">联系方式：</view>
+										<view class="flex-sub">{{order.username}}<text>{{order.mobile}}</text></view>
+									</view>
+									<view class="pitem flex">
+										<view class="text-dark">预约时间：</view>
+										<view class="flex-sub">{{Time.dataTime(order.reserve_time)}}</view>
+									</view>
+								</view>
+							</navigator>
+							<view class="padding solid-top" wx:if='{{TabCur != 0}}'>
+								<view class="pitem flex">
+									<view class="text-dark">维修师傅：</view>
+									<view class="flex-sub">{{order.repairUser.username}}</view>
+								</view>
+								<view class="pitem flex">
+									<view class="text-dark">联系方式：</view>
+									<view class="flex-sub g" bindtap="call" data-tel='{{order.repairUser.mobile}}'>{{order.repairUser.mobile}}</view>
+								</view>
+								<view class="btnbox text-right" wx:if='{{TabCur == 4 && order.appraise == null}}'>
+									<button class="cu-btn line-green" bindtap="pingjia" data-index='{{ii}}'>评价工单</button>
+								</view>
+								<view class="btnbox text-right" wx:elif='{{TabCur == 4 && order.appraise}}'>
+									<navigator hover-class="none" url="{{TabCur == 1 || TabCur == 2 ? '../details_re/details_re' : TabCur == 3 ? '../details_not/details_not' :TabCur == 4 ? '../details_pj/details_pj':'../details/details' }}?id={{order.id}}">
+										<button class="cu-btn line-green">已经评价</button>
+									</navigator>
+								</view>
+							</view>
+							<!-- </navigator> -->
+						</view>
+					</view>
+				</block>
+			</view>
+			<!-- 无记录 -->
+			<view class="padding-xl" hidden="{{getlistData.length}}">
+				<view class="emptybox padding-lg text-center">
+					<image src="/images/empty.png" mode="widthFix"></image>
+					<view>暂无记录</view>
+				</view>
+			</view>
+		</scroll-view>
+	</swiper-item>
+</swiper>
+
+<view class='cu-load load-modal' wx:if='{{logo}}'>
+	<view class='gray-text long'>数据请求</view>
+</view>

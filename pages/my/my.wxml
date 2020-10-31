@@ -1,0 +1,110 @@
+<!--my.wxml-->
+<view class="userinfobox flex align-center">
+	<view class="userimg">
+		<image class="userinfo-avatar" src="{{userInfo.avatar}}"></image>
+	</view>
+	<view class="userinfo flex-sub">
+		<view class="username twoline">{{userInfo.username}}</view>
+		<view class="userid">ID：{{userInfo.id}}</view>
+	</view>
+	<view class="status none">维修师傅</view>
+</view>
+<!-- 用户 -->
+<view class="disblock" wx:if='{{type == 1}}'>
+	<view class="myorder bg-white container shadow-lg">
+		<view class="cu-list grid col-3">
+			<view class="cu-item" bindtap="navigator" data-i='0'>
+				<view class="num">{{orderNumData.meet ? orderNumData.meet : 0}}</view>
+				<text>已报修</text>
+			</view>
+			<view class="cu-item" bindtap="navigator" data-i='3'>
+				<view class="num">{{orderNumData.fail ? orderNumData.fail : 0}}</view>
+				<text>未完成</text>
+			</view>
+			<view class="cu-item" bindtap="navigator" data-i='4'>
+				<view class="num">{{orderNumData.complete ? orderNumData.complete: 0 }}</view>
+				<text>已完成</text>
+			</view>
+		</view>
+	</view>
+	<view class="myorder bg-white container shadow-lg">
+		<view class="cu-list menu">
+			<navigator class="cu-item arrow" hover-class="none" url="../personal/personal">
+				<view class="content flex align-center">
+					<image src="/images/i1.png" class="png" mode="aspectFit"></image>
+					<text class="text-black">个人信息</text>
+				</view>
+			</navigator>
+			<navigator class="cu-item arrow" hover-class="none" url="../myrepair/myrepair">
+				<view class="content flex align-center">
+					<image src="/images/i2.png" class="png" mode="aspectFit"></image>
+					<text class="text-black">我的报修</text>
+				</view>
+			</navigator>
+			<navigator class="cu-item arrow" hover-class="none" url="../reward/reward">
+				<view class="content flex align-center">
+					<image src="/images/i3.png" class="png" mode="aspectFit"></image>
+					<text class="text-black">奖励记录</text>
+				</view>
+			</navigator>
+			<button class="cu-item arrow" open-type="contact">
+				<view class="content flex align-center">
+					<image src="/images/i4.png" class="png" mode="aspectFit"></image>
+					<text class="text-black">联系客服</text>
+				</view>
+			</button>
+		</view>
+	</view>
+</view>
+<!-- 维修师傅 -->
+<view wx:if='{{type==2}}'>
+	<view class="myorder bg-white container shadow-lg">
+		<view class="cu-list grid col-3">
+			<view class="cu-item" bindtap="masterurl" data-i='0'>
+				<view class="num">{{orderNumData.meet ? orderNumData.meet : 0}}</view>
+				<text>待接单</text>
+			</view>
+			<view class="cu-item" bindtap="masterurl" data-i='3'>
+				<view class="num">{{orderNumData.fail ? orderNumData.fail : 0}}</view>
+				<text>未完成</text>
+			</view>
+			<view class="cu-item" bindtap="masterurl" data-i='4'>
+				<view class="num">{{orderNumData.complete ? orderNumData.complete : 0}}</view>
+				<text>已完成</text>
+			</view>
+		</view>
+	</view>
+	<view class="myorder bg-white container shadow-lg">
+		<view class="cu-list menu">
+			<navigator class="cu-item arrow" hover-class="none" url="../personal/personal">
+				<view class="content flex align-center">
+					<image src="/images/i1.png" class="png" mode="aspectFit"></image>
+					<text class="text-black">个人信息</text>
+				</view>
+			</navigator>
+			<navigator class="cu-item arrow" hover-class="none" url="../index/index" open-type="switchTab">
+				<view class="content flex align-center">
+					<image src="/images/i2.png" class="png" mode="aspectFit"></image>
+					<text class="text-black">报修列表</text>
+				</view>
+			</navigator>
+			<navigator class="cu-item arrow" hover-class="none" url="../tongji/tongji">
+				<view class="content flex align-center">
+					<image src="/images/i5.png" class="png" mode="aspectFit"></image>
+					<text class="text-black">工单统计</text>
+				</view>
+			</navigator>
+		</view>
+	</view>
+</view>
+
+<view class="logo" hidden="{{is_login}}">
+	<image src="/images/logo.png"></image>
+	<view class="item">
+		<button class="cu-btn lg bg-green" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权信息登录</button>
+	</view>
+</view>
+
+<view class='cu-load load-modal' wx:if='{{logo}}'>
+	<view class='gray-text long'>加载中...</view>
+</view>

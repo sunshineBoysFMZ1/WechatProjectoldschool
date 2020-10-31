@@ -1,0 +1,10 @@
+/* pages/changetime/changetime.wxss */
+@import "../index/index.wxss";
+
+picker-view-column {
+    text-align: center;
+}
+.cu-bar{padding: 20rpx;}
+.cu-bar>view:last-child {
+    color: #59CE6E;
+}

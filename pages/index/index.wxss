@@ -1,0 +1,32 @@
+/* pages/index/index.wxss */
+@import "../myrepair/myrepair.wxss";
+.cu-form-group .title {min-width: calc(5em + 10rpx);color:#666;padding-right:0;}
+.cu-form-group picker .picker{text-align:left;}
+.cu-form-group .picker{text-align:left;}
+.cu-form-group input,.cu-form-group picker .picker,.cu-form-group textarea{color:#333;font-size:32rpx;}
+.cu-form-group+.cu-bar{border-top:1rpx solid #eee;}
+.btn{margin:30rpx 20rpx 50rpx}
+.cu-form-group.align-start .title{line-height:1.2em;height:1.2em;}
+
+picker-view-column {
+    text-align: center;
+}
+.cu-bar{padding: 20rpx;}
+.cu-bar>view:last-child {
+    color: #59CE6E;
+}
+.showTimes{
+    position: fixed;
+    /* top: 40%; */
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index:999;
+    height: 100vh;
+}
+.showTimes >view:first-child{
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    background: #fff;
+}

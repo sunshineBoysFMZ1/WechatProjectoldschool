@@ -1,0 +1,10 @@
+<!--pages/reset_name/reset_name.wxml-->
+<view class="container bg-white shadow-lg">
+	<form>
+		<view class="cu-form-group">
+			<view class="title">修改姓名：</view>
+			<input placeholder="请填写你的姓名" value="{{name}}" bindinput="username"></input>
+		</view>
+	</form>
+</view>
+<view class="btn flex flex-direction"><button class="cu-btn lg bg-green" bindtap="saveinfo">保存修改</button></view>

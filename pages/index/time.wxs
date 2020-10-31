@@ -1,0 +1,15 @@
+var wxjs = {
+    dataTime: function (value) {
+        var time =getDate(value * 1000) 
+        var y = time.getFullYear();
+        var m = time.getMonth() + 1;
+        var d = time.getDate();
+        var h = time.getHours();
+        var mm = time.getMinutes() < 10 ? '0'+time.getMinutes() :time.getMinutes() ;
+        var s = time.getSeconds() < 10 ? '0'+time.getSeconds() : time.getSeconds();
+        return y + '-' + m + '-' + d + ' ' + h + ':' + mm ;
+    }
+}
+module.exports = {
+    dataTime:wxjs.dataTime
+}

@@ -1,0 +1,5 @@
+/* pages/finish/finish.wxss */
+@import "../index/index.wxss";
+.cu-form-group+.cu-bar,.cu-form-group+.cu-form-group{border:0}
+.cu-form-group textarea{border:1rpx solid #eee;border-radius:10rpx;padding:20rpx;margin:24rpx 0 0}
+.btn{margin-top:40rpx}

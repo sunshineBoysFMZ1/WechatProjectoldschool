@@ -1,0 +1,10 @@
+<!--pages/reset_num/reset_num.wxml-->
+<view class="container bg-white shadow-lg">
+	<form>
+		<view class="cu-form-group">
+			<view class="title">修改号码：</view>
+			<input placeholder="请填写手机号码" value="{{mobile}}" bindinput="mobileData"></input>
+		</view>
+	</form>
+</view>
+<view class="btn flex flex-direction"><button class="cu-btn lg bg-green" bindtap="saveinfo">保存修改</button></view>

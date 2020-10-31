@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/my/my",
+    "pages/myrepair/myrepair",
+    "pages/tongji/tongji",
+    "pages/reward/reward",
+    "pages/unfinish/unfinish",
+    "pages/finish/finish",
+    "pages/details/details",
+    "pages/details_pj/details_pj",
+    "pages/appraise/appraise",
+    "pages/changetime/changetime",
+    "pages/personal/personal",
+    "pages/reset_name/reset_name",
+    "pages/reset_num/reset_num",
+    "pages/details_re/details_re",
+    "pages/details_not/details_not"
+  ],
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#59CE6E",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "工单报修",
+        "iconPath": "images/tab1.png",
+        "selectedIconPath": "/images/tab1_on.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "个人中心",
+        "iconPath": "/images/tab2.png",
+        "selectedIconPath": "/images/tab2_on.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#59CE6E",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
+}

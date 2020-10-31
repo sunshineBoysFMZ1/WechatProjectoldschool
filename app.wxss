@@ -1,0 +1,23 @@
+/**app.wxss**/
+@import "libs/main.wxss";
+@import "libs/icon.wxss";
+.container{margin:20rpx;border-radius:12rpx;overflow:hidden;}
+.twoline{display:-webkit-box;overflow:hidden;text-overflow: ellipsis;word-wrap: break-word;white-space: normal !important;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
+.oneline{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cu-form-group picker{padding-right:0;}
+.cu-form-group picker::after {display: none;position: relative;}
+.cu-form-group picker .picker{padding-right:40rpx;font-size:32rpx;}
+.cu-form-group picker .picker::after {font-family: "cuIcon";display: block;content: "\e6a3";position: absolute;font-size: 34rpx;color: var(--grey);line-height: 100rpx;width: 60rpx;text-align: center;top: 0;bottom: 0;right: -20rpx;margin: auto;}
+/* .bg-green{background-color:#03CA83;} */
+.none{display:none;}
+.cu-btn.lg{height:84rpx;}
+.g{
+    color: #00CC66;
+}
+.red{
+    color:#FF3B3B ;
+}
+.long {
+    font-size: 17rpx;
+    color: #eee;
+}

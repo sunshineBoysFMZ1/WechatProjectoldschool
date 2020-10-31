@@ -1,0 +1,144 @@
+/**my.wxss 03CA83**/
+.container {
+    margin: 20rpx;
+    border-radius: 12rpx;
+    overflow: hidden;
+    margin-top: 0;
+}
+
+.userinfobox {
+    position: relative;
+    padding: 40rpx;
+    padding-bottom: 120rpx;
+    background-color: #59CE6E;
+}
+
+.userinfo {
+    color: #fff;
+    font-size: 34rpx;
+    overflow: hidden;
+}
+
+.userinfo-avatar {
+    width: 128rpx;
+    height: 128rpx;
+    margin-right: 20rpx;
+    border-radius: 50%;
+    display: block;
+    border: solid 2rpx rgba(255, 255, 255, 0.4)
+}
+
+.username {
+    font-weight: blod;
+}
+
+.userid {
+    font-size: 28rpx;
+    padding-top: 8rpx;
+}
+
+.myorder {
+    position: relative;
+    top: -80rpx;
+}
+
+.grid.col-3 .cu-item {
+    width: 33.333%;
+}
+
+.cu-list.grid .cu-item {
+    padding: 30rpx 0
+}
+
+.cu-list.grid .cu-item:after {
+    top: 30rpx;
+    height: calc(200% - 120rpx);
+    border-bottom: 0;
+}
+
+.allorder.cu-bar {
+    color: #666;
+    font-size: 28rpx;
+    min-height: 80rpx;
+}
+
+.allorder.cu-bar .cu-title {
+    font-size: 32rpx;
+    color: #222;
+}
+
+.cu-img image {
+    width: 48rpx;
+    height: 48rpx;
+    margin-right: 16rpx;
+}
+
+.num {
+    font-size: 48rpx;
+    color: #333;
+}
+
+.myorder .cu-list.grid .cu-item text {
+    font-size: 24rpx;
+    color: #888;
+    margin-top: 4rpx;
+}
+
+.myorder .cu-list.grid.no-border .cu-item {
+    padding: 0;
+}
+
+.cu-list.menu>.cu-item.arrow {
+    padding-right: 66rpx;
+}
+
+.cu-list.menu>.cu-item .action {
+    color: #666;
+    font-size: 28rpx;
+}
+
+.status {
+    margin-left: 30rpx;
+    background: #50C167;
+    margin-right: -40rpx;
+    color: #fff;
+    border-radius: 50rpx 0 0 50rpx;
+    padding: 10rpx 20rpx
+}
+
+.logo {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    background-color: rgba(52, 52, 52, 0.6);
+    z-index: 9999;
+    text-align: center;
+}
+
+.logo image {
+    width: 40%;
+    height: 20%;
+    margin-top: 20%;
+    position: absolute;
+    top: 10%;
+    left: 27%;
+    z-index: 10;
+}
+
+.logo .item {
+    width: 70%;
+    background: #fff;
+    height: 30%;
+    margin: 50% auto;
+    border-radius: 20rpx;
+    position: relative;
+}
+
+.item button {
+    position: absolute;
+    bottom: 15px;
+    text-align: center;
+    left: 24%;
+
+}

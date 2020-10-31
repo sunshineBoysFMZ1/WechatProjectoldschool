@@ -1,0 +1,225 @@
+<!--pages/index/index.wxml-->
+<!-- 用户 -->
+<wxs module='Time' src='time.wxs'></wxs>
+<form bindsubmit="formSubmit" bindreset="formReset" hidden="{{type==2}}">
+	<view class="disblock">
+		<view class="container bg-white shadow-lg">
+			<view class="cu-form-group">
+				<span class='red'>*</span>
+				<view class="title">维修区域：</view>
+				<picker bindchange="PickerChange" value="{{repair_area_id}}" range="{{picker}}" name='repair_area_id'>
+					<view class="picker">
+						{{index?picker[index]:'请选择维修区域'}}
+					</view>
+				</picker>
+			</view>
+			<!-- wx:if='{{indexB != -1}}' -->
+			<view class="cu-form-group">
+				<span class='red'>*</span>
+				<view class="title">维修楼栋：</view>
+				<picker bindchange="PickerChangeB" value="{{repair_floor_id}}" range="{{pickerB}}" name='repair_floor_id'>
+					<view class="picker">
+						{{indexB !=-1 ?pickerB[indexB]:'请选择维修楼栋'}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<span class='red'>*</span>
+				<view class="title">详细地址：</view>
+				<input placeholder="请填写维修详细地址，如‘4层405’" name='address' value="{{address}}"></input>
+			</view>
+			<view class="cu-form-group">
+				<span class='red'>*</span>
+				<view class="title">维修分类：</view>
+				<picker bindchange="PickerChangeK" value="{{category_id}}" range="{{pickerK}}" name='category_id'>
+					<view class="picker">
+						{{indexK?pickerK[indexK]:'请选择维修分类'}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group" bindtap="selectAdd" data-i='1' style="justify-content:flex-start">
+				<span class='red'>*</span>
+				<view class="title">预约时间：</view>
+				<picker disabled='true'>
+					<view class="picker pickers">
+						{{selectTime !='' ? selectTime : rawTime}}
+					</view>
+				</picker>
+			</view>
+			<view class="cu-form-group">
+				<span class='red'>*</span>
+				<view class="title">报修人员：</view>
+				<input placeholder="请填写你的姓名" name='username' value="{{username}}" bindinput="userText" data-i='-1'></input>
+			</view>
+			<view class="cu-form-group">
+				<span class='red'>*</span>
+				<view class="title">联系方式：</view>
+				<input placeholder="请填写你的电话号码" name='mobile' type="number" maxlength="11" value="{{mobile}}" bindinput="userText" data-i='1'></input>
+			</view>
+			<view class="cu-bar">
+				<view class="action"><span class='red'>*</span>图片上传：</view>
+				<view class="action">{{imgList.length}}/3</view>
+			</view>
+			<view class="cu-form-group">
+				<view class="grid col-3 grid-square flex-sub">
+					<view class="bg-img" wx:for="{{imgList}}" wx:key="index" bindtap="ViewImage" data-url="{{imgList[index]}}">
+						<image src='{{imgList[index]}}' mode='aspectFill'></image>
+						<view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+							<text class="cuIcon-close"></text>
+						</view>
+					</view>
+					<view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<3}}">
+						<text class="cuIcon-cameraadd"></text>
+					</view>
+				</view>
+			</view>
+			<view class="cu-form-group align-start" style="padding-top:22rpx;">
+				<view><span class='red'>*</span>备注留言：</view>
+				<textarea maxlength="-1" placeholder="请填写备注留言" name='message' wx-if='{{TimeShow != 1}}' value="{{message}}" bindinput="liuyan"></textarea>
+			</view>
+		</view>
+		<view class="btn flex flex-direction"><button class="cu-btn lg bg-green" formType="submit">提交报修</button></view>
+	</view>
+</form>
+<!-- 维修师傅 -->
+<view class="disblock" wx:if='{{type==2}}' style="z-index:9999">
+	<scroll-view scroll-x class="nav bg-white" scroll-with-animation scroll-left="{{scrollLeft}}">
+		<view class="">
+			<view class="cu-item {{0==TabCur?'cur':''}}" bindtap="tabSelect" data-id="0">
+				<text>待接单</text><text class="text-yellow">({{listnum.djd ? listnum.djd : 0}})</text></view>
+			<view class="cu-item {{1==TabCur?'cur':''}}" bindtap="tabSelect" data-id="1">
+				<text>已接单</text><text class="text-yellow">({{listnum.yjd ? listnum.yjd : 0}})</text></view>
+			<view class="cu-item {{2==TabCur?'cur':''}}" bindtap="tabSelect" data-id="2">
+				<text>维修中</text><text class="text-green">({{listnum.wxz ? listnum.wxz : 0}})</text></view>
+			<view class="cu-item {{3==TabCur?'cur':''}}" bindtap="tabSelect" data-id="3">
+				<text>未完成</text><text class="text-red">({{listnum.wwc ? listnum.wwc : 0}})</text></view>
+			<view class="cu-item {{4==TabCur?'cur':''}}" bindtap="tabSelect" data-id="4">
+				<text>已完成</text><text class="text-blue">({{listnum.ywc ? listnum.ywc : 0}})</text></view>
+		</view>
+	</scroll-view>
+	<swiper class="tab-content" current="{{TabCur}}" duration="300" bindchange="switchTab" style="height:calc(100vh - 92rpx)">
+		<swiper-item wx:for="{{length}}" wx:key='index'>
+			<scroll-view scroll-y class="pagecontent" bindscrolltolower='scrolltolower'>
+				<view wx:if='{{getlistData.length}}'>
+					<block wx:for='{{getlistData}}' wx:for-item='order' wx:for-index='ii' wx:key='ii'>
+						<view class="order-list">
+							<view class="cu-list menu">
+								<!-- ../details/details(默认)  pages/details_re/details_re(已接单,维修中)  pages/details_not/details_not(未完成) pages/details_pj/details_pj(已完成)-->
+								<navigator class="orderbar solid-bottom" hover-class="none" url="{{TabCur==1 || TabCur == 2 ? '../details_re/details_re' : TabCur == 3 ? '../details_not/details_not' : TabCur==4 ? '../details_pj/details_pj' :'../details/details'}}?id={{order.id}}">
+									<view class="text-black text-lg">{{order.category.name}}</view>
+									<view class="status {{TabCur==2?'bg-green':TabCur== 3 ? 'bg-red': TabCur==4 ? 'bg-blue':''}}">{{TabCur == 1 ? '已接单' : TabCur == 2 ? '维修中' : TabCur == 3 ? '未完成' : (TabCur == 4 && order.appraise )? '已完成' : (TabCur == 4 && order.appraise == null ? '待评价':'待接单')}}</view>
+								</navigator>
+								<view class="padding">
+									<view class="pitem flex">
+										<view class="text-dark">订单编号：</view>
+										<view class="flex-sub">{{order.order_no}}</view>
+									</view>
+									<view class="pitem flex">
+										<view class="text-dark">维修地址：</view>
+										<view class="flex-sub">{{order.area.name}}{{order.floor.name}}-{{order.address}}</view>
+									</view>
+									<view class="pitem flex">
+										<view class="text-dark">联系方式：</view>
+										<view class="flex-sub">{{order.username}}<text class="g" bindtap="call" data-tell='{{order.mobile}}'>{{order.mobile}}</text></view>
+									</view>
+
+									<view class="pitem flex">
+										<view class="text-dark">预约时间：</view>
+										<view class="flex-sub">{{Time.dataTime(order.reserve_time)}}</view>
+									</view>
+
+									<view class="btnbox text-right" wx:if='{{TabCur == 0}}'>
+										<button class="cu-btn line-orange" bindtap="showModal" data-target="DialogModal1" data-id='{{order.id}}'>取消工单</button>
+										<button class="cu-btn line-orange" bindtap="change" data-index='{{ii}}'>改签时间</button>
+										<button class="cu-btn line-green" bindtap="receiving" data-id='{{order.id}}'>立即接单</button>
+									</view>
+									<view class="btnbox text-right" wx:elif='{{TabCur == 1}}'>
+										<button class="cu-btn line-green" bindtap="signin" data-id='{{order.id}}'>签到打卡</button>
+									</view>
+									<view class="btnbox text-right" wx:elif='{{TabCur == 2}}'>
+										<button class="cu-btn line-red" bindtap="unfinish" data-id='{{order.id}}'>未完成</button>
+										<button class="cu-btn line-green" bindtap="finish" data-id='{{order.id}}'>完成维修</button>
+									</view>
+									<view class="btnbox text-right" wx:elif='{{TabCur == 3}}'>
+										<button class="cu-btn line-green" bindtap="finish" data-id='{{order.id}}'>完成维修</button>
+									</view>
+								</view>
+								<navigator class="orderbar solid-top" hover-class="none" url="../details_pj/details_pj?id={{order.id}}" wx:if='{{TabCur == 4 && order.appraise}}'>
+									<view class="flex align-center">
+										<view class="text-dark">服务评价：</view>
+										<view class="flex-sub flex align-center">
+											<block wx:for='{{order.appraise.star}}' wx:key='index'>
+												<view class="star cuIcon-favorfill"></view>
+											</block>
+										</view>
+									</view>
+									<view class="flex align-center text-sm text-gray">
+										查看更多<text class="text-grey cuIcon-right"></text>
+									</view>
+								</navigator>
+							</view>
+						</view>
+						<!-- 无记录 -->
+					</block>
+				</view>
+				<view class="padding-xl" hidden="{{getlistData.length}}">
+					<view class="emptybox padding-lg text-center">
+						<image src="/images/empty.png" mode="widthFix"></image>
+						<view>暂无记录</view>
+					</view>
+				</view>
+			</scroll-view>
+		</swiper-item>
+	</swiper>
+</view>
+
+<view wx-if='{{TimeShow == 1}}' class="showTimes">
+	<view>
+		<view class="cu-bar" bindtap="selectAdd" data-i='-1'>
+			<view>取消</view>
+			<view>确定</view>
+		</view>
+		<picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{dateTime}}" bindchange="bindChange">
+			<picker-view-column>
+				<view wx:for="{{dateTimeArray[0]}}" wx:key='index' style="line-height: 50px">{{item}}年</view>
+			</picker-view-column>
+			<picker-view-column>
+				<view wx:for="{{dateTimeArray[1]}}" wx:key='index' style="line-height: 50px">{{item}}月</view>
+			</picker-view-column>
+			<picker-view-column>
+				<view wx:for="{{dateTimeArray[2]}}" wx:key='index' style="line-height: 50px">{{item}}日</view>
+			</picker-view-column>
+			<picker-view-column>
+				<view wx:for="{{dateTimeArray[3]}}" wx:key='index' style="line-height: 50px">{{item}}时</view>
+			</picker-view-column>
+			<picker-view-column>
+				<view wx:for="{{dateTimeArray[4]}}" wx:key='index' style="line-height: 50px">{{item}}分</view>
+			</picker-view-column>
+		</picker-view>
+	</view>
+</view>
+
+<view class="cu-modal show" wx:if='{{modalName=="DialogModal1"}}'>
+	<view class="cu-dialog">
+		<view class="cu-bar bg-white justify-end">
+			<view class="content">取消工单</view>
+			<view class="action" bindtap="hideModal">
+				<text class="cuIcon-close text-red"></text>
+			</view>
+		</view>
+		<view class="padding-xl" style="text-align:left">
+			<textarea maxlength="-1" bindinput="textareaAInput" placeholder="填写原因"></textarea>
+		</view>
+		<view class="cu-bar bg-white justify-end">
+			<view class="action">
+				<button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+				<button class="cu-btn bg-green margin-left" bindtap="cancel">确定</button>
+
+			</view>
+		</view>
+	</view>
+</view>
+<!--  -->
+<view class='cu-load load-modal' wx:if='{{logo}}'>
+	<view class='gray-text long'>创建成功</view>
+</view>

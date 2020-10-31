@@ -1,0 +1,20 @@
+<!--pages/reward/reward.wxml-->
+<wxs module='Time' src='../index/time.wxs'></wxs>
+<view class="reward-money container bg-white shadow-lg">
+	<view class="text-xxl">{{Data.num}}</view>
+	<view class="text-sm text-gray">奖励累计(元)</view>
+</view>
+<view class="container bg-white shadow-lg">
+	<block wx:for='{{Detail}}' wx:key='index'>
+		<view class="cu-item flex align-center">
+			<view class="icon">
+				<image src="/images/i3.png" class="png" mode="aspectFit"></image>
+			</view>
+			<view class="flex-sub">
+				<view class="title">{{item.desc}}</view>
+				<view class="text-sm text-gray">{{Time.dataTime(item.create_time)}}</view>
+			</view>
+			<view class="text-xl text-orange">+{{item.money}}</view>
+		</view>
+	</block>
+</view>

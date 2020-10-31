@@ -1,0 +1,81 @@
+<!--pages/details_not/details_not.wxml-->
+<wxs module='Time' src='../index/time.wxs'></wxs>
+<view class="cu__title">工单详情</view>
+<view class="bg-white container shadow-lg">
+	<view class="cu-item">
+		<view class="title">维修区域：</view>
+		<view class="flex-sub text-black">{{Detail.area.name}}</view>
+	</view>
+	<view class="cu-item">
+		<view class="title">维修位置：</view>
+		<view class="flex-sub text-black">{{Detail.floor.name}}</view>
+	</view>
+	<view class="cu-item">
+		<view class="title">详细地址：</view>
+		<view class="flex-sub text-black">{{Detail.address}}</view>
+	</view>
+	<view class="cu-item">
+		<view class="title">维修分类：</view>
+		<view class="flex-sub text-black">{{Detail.category.name}}</view>
+	</view>
+	<view class="cu-item">
+		<view class="title">预约时间：</view>
+		<view class="flex-sub text-black">{{Time.dataTime(Detail.reserve_time)}}</view>
+	</view>
+	<view class="cu-item">
+		<view class="title">保修人员：</view>
+		<view class="flex-sub text-black">{{Detail.username}}</view>
+	</view>
+	<view class="cu-item">
+		<view class="title">联系方式：</view>
+		<view class="flex-sub text-black g" bindtap="call"  data-tel='{{Detail.mobile}}'>{{Detail.mobile}}</view> 
+	</view>
+	<view class="cu-item block">
+		<view class="title">上传图片：</view>
+		<view class="content grid col-3 grid-square">
+			<block wx:for='{{images}}' wx:key='index'>
+				<view class="bg-img" bindtap="ViewImage" data-url='{{item}}' data-i='-1'>
+					<image src='{{item}}' mode='aspectFill'></image>
+				</view>
+			</block>
+		</view>
+	</view>
+	<view class="cu-item">
+		<view class="title">备注留言：</view>
+		<view class="flex-sub text-black">{{Detail.message}}</view>
+	</view>
+</view>
+<view class="cu__title">服务详情</view>
+<view class="bg-white container shadow-lg">
+	<view class="cu-item">
+		<view class="title">维修师傅：</view>
+		<view class="flex-sub text-black">{{Detail.repairUser.username}}</view>
+	</view>
+	<view class="cu-item">
+		<view class="title">联系方式：</view>
+		<view class="flex-sub text-black g" bindtap="call"  data-tel='{{Detail.repairUser.mobile}}'>{{Detail.repairUser.mobile}}</view>
+	</view>
+	<!-- 未完成原因 -->
+	<view class="reason">
+		<view class="cu-item">
+			<view class="title">原因说明：</view>
+			<view class="flex-sub text-black">{{Detail.fail_message}}</view>
+		</view>
+		<view class="cu-item block">
+			<view class="title">上传图片：</view>
+			<view class="content grid col-3 grid-square">
+				<block wx:for='{{fail_images}}' wx:key='index'>
+					<view class="bg-img" bindtap="ViewImage" data-url='{{item}}' data-i='2'>
+						<image src='{{item}}' mode='aspectFill'></image>
+					</view>
+				</block>
+			</view>
+		</view>
+	</view>
+</view>
+
+<view class='cu-load load-modal' wx:if='{{logo}}'>
+	<view class='gray-text long'>加载中...</view>
+</view>
+
+<view style="width:100%;height:100rpx"></view>

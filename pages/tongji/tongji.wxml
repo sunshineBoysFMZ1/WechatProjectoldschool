@@ -1,0 +1,56 @@
+<!--pages/tongji/tongji.wxml-->
+<wxs module='Time' src='../index/time.wxs'></wxs>
+<view class="margin">
+	<view class="c-month">
+		<picker mode="date" fields="month" value="{{date}}" bindchange="DateChange">
+			<view class="picker flex align-center">
+				<text class="month">{{date}}</text><text class="cuIcon-triangledownfill"></text>
+			</view>
+		</picker>
+	</view>
+	<view class="tongji flex">
+		<view class="flex-sub bg-white radius shadow-lg">
+			<view class="text-xxl text-green">{{tongjinum.complete ? tongjinum.complete : 0}}</view>
+			<view class="text-df text-gray">完成工单</view>
+		</view>
+		<view class="flex-sub bg-white radius shadow-lg">
+			<view class="text-xxl text-red">{{tongjinum.fail ? tongjinum.fail : 0}}</view>
+			<view class="text-df text-gray">未完成工单</view>
+		</view>
+	</view>
+</view>
+<view class="listbox">
+	<block wx:for='{{tongjinLis}}' wx:key='index'>
+		<view class="cu-list">
+			<navigator class="orderbar solid-bottom" hover-class="none" url="{{item.status==5 ? '../details_pj/details_pj' : '../details_not/details_not'}}?id={{item.id}}">
+				<view class="text-black text-lg">{{item.category.name}}</view>
+				<view class="status  {{item.status == 5 ? 'bg-green' : 'bg-red' }}">{{item.status==5?'已完成':'未完成'}}</view>
+			</navigator>
+			<view class="padding">
+				<view class="pitem flex">
+					<view class="text-dark">订单编号：</view>
+					<view class="flex-sub">{{item.order_no}}</view>
+				</view>
+				<view class="pitem flex">
+					<view class="text-dark">维修地址：</view>
+					<view class="flex-sub">{{item.area.name}}-{{item.floor.name}}-{{item.address}}</view>
+				</view>
+				<view class="pitem flex">
+					<view class="text-dark">联系方式：</view>
+					<view class="flex-sub">{{item.username}}<text class="g" bindtap="call" data-tel='{{item.mobile}}'>{{item.mobile}}</text></view>
+				</view>
+				<view class="pitem flex">
+					<view class="text-dark">预约时间：</view>
+					<view class="flex-sub">{{Time.dataTime(item.reserve_time)}}</view>
+				</view>
+			</view>
+		</view>
+	</block>
+</view>
+<view class="padding-xl" hidden="{{tongjinLis.length}}">
+	<view class="emptybox padding-lg text-center">
+		<image src="/images/empty.png" mode="widthFix"></image>
+		<view>暂无记录</view>
+	</view>
+</view>
+<view style="width:100%;height:100rpx;"></view>

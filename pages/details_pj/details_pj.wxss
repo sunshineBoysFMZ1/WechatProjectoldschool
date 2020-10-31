@@ -1,0 +1,2 @@
+/* pages/details_pj/details_pj.wxss */
+@import "../details/details.wxss"

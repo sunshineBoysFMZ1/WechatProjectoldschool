@@ -1,0 +1,24 @@
+/* pages/myrepair/myrepair.wxss */
+.nav{border-bottom:solid 2rpx #ececec}
+.nav .cu-item{margin:0 30rpx;padding:0 10rpx}
+.pagecontent{height:calc(100vh - 92rpx)}
+.order-list{padding-top:20rpx;}
+.cu-list.menu .cu-item{margin:0;border-radius:0;}
+.order-list .cu-list{margin:0 20rpx 20rpx;border-radius:12rpx;background:#fff}
+.order-list .padding{padding:24rpx 30rpx}
+.orderbar{display:flex;justify-content:space-between;align-items:center;padding:20rpx 30rpx}
+.status{border-radius:50rpx 0 0 50rpx;background:#FFA002;color:#fff;font-size:26rpx;line-height:52rpx;height:52rpx;padding:0 16rpx;margin-right:-30rpx}
+.status.bg-green{background:#66D016;}
+.status.bg-red{background:#FF3B3B;}
+.status.bg-blue{background:#0091FE;}
+.pitem{color:#333;align-items: center;}
+.pitem .gray{color:#666;}
+.pitem .flex-sub text{margin-left:16rpx;}
+.pitem+.pitem{margin-top:16rpx;}
+.btnbox{margin-top:30rpx;}
+.text-dark{color:#666;}
+.btnbox .cu-btn{margin-left:24rpx;width:180rpx;box-sizing:border-box;border-radius:20rpx;padding:0}
+.star{color:#ffa100;margin-right:10rpx;font-size:36rpx;}
+.nav .cu-item.cur{border-color:#59CE6E;color:#222;}
+.text-yellow{color:#FFA002;}
+.emptybox image{width:200rpx;}

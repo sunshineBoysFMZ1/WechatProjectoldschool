@@ -1,0 +1,4 @@
+/* pages/appraise/appraise.wxss */
+@import "../finish/finish.wxss";
+@import "../details/details.wxss";
+.star{font-size:48rpx;margin-right:16rpx;}
